@@ -1,0 +1,83 @@
+common-conf: &common-conf
+  path: "./common"
+  config:
+    cradle:
+      bios:
+        shell: |
+          mkdir -p log
+          env | sort > log/common-env
+          cat <<EOF | tee log/common-cmd > $HIE_BIOS_OUTPUT
+          cabal
+          --enable-nix
+          --project-file=cabal.project
+          --builddir=build/common
+          v2-repl
+          --haddock-all
+          --ghc
+          --enable-optimization=0
+          lib:common
+          EOF
+
+cradle:
+  multi:
+    - path: "./frontend"
+      config:
+        cradle:
+          bios:
+            # - *common-conf
+            # - path: "./frontend"
+            shell: |
+              mkdir -p log
+              env | sort > log/frontend-env
+              cat <<EOF | tee log/frontend-cmd > $HIE_BIOS_OUTPUT
+              cabal
+              --enable-nix
+              --project-file=cabal.project
+              --builddir=build/frontend
+              v2-repl
+              --haddock-all
+              --ghc
+              --enable-optimization=0
+              $HIE_BIOS_ARG
+              EOF
+
+    - path: "./backend"
+      config:
+        cradle:
+          bios:
+            shell: |
+              mkdir -p log
+              env | sort > log/backend-env
+              cat <<EOF | tee log/backend-cmd > $HIE_BIOS_OUTPUT
+              cabal
+              --enable-nix
+              --project-file=cabal.project
+              --builddir=build/backend
+              v2-repl
+              --haddock-all
+              --ghc
+              --enable-optimization=0
+              $HIE_BIOS_ARG
+              EOF
+
+    - path: "./common"
+      config:
+        cradle:
+          bios:
+            shell: |
+              mkdir -p log
+              env | sort > log/common-env
+              cat <<EOF | tee log/common-cmd > $HIE_BIOS_OUTPUT
+              cabal
+              --enable-nix
+              --project-file=cabal.project
+              --builddir=build/common
+              v2-repl
+              --haddock-all
+              --ghc
+              --enable-optimization=0
+              $HIE_BIOS_ARG
+              EOF
+
+dependencies:
+  - default.nix

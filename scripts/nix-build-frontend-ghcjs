@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. ./.build-env
+cd $PROJ_DIR
+
+exec nix-build -o $DIST_DIR/frontend -A ghcjs.frontend
+# closure-compiler $DIST_DIR/bin/frontend.jsexe/all.js \
+#         --externs=$DIST_DIR/bin/frontend.jsexe/all.js.externs \
+#         --jscomp_off=checkVars \
+#         --compilation_level=ADVANCED_OPTIMIZATIONS \
+#     > $DIST_DIR/all.min.js

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. ./.build-env
+exec nix-shell $PROJ_DIR                             \
+    --attr shells.ghcjs                              \
+    --run "                                          \
+        cabal                                        \
+        --project-file=$PROJ_DIR/cabal-ghcjs.project \
+        --builddir=$BUILD_DIR/frontend               \
+        new-build                                    \
+        frontend                                     \
+    "

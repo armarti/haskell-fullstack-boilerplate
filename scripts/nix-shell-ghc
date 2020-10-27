@@ -1,0 +1,4 @@
+#!/bin/sh
+
+. ./.build-env
+exec nix-shell $PROJ_DIR --attr shells.ghc

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+. ./.build-env
+exec nix-shell $PROJ_DIR                        \
+    --attr shells.ghc                           \
+    --run "                                     \
+        cabal                                   \
+        --project-file=$PROJ_DIR/cabal.project  \
+        --builddir=$BUILD_DIR/backend           \
+        new-build                               \
+        backend                                 \
+    "

@@ -1,0 +1,6 @@
+hlint
+hls
+hls.d
+hls.d/
+hls.d/*
+cabal

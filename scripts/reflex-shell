@@ -1,0 +1,4 @@
+#!/bin/sh
+
+. ./.build-env
+exec $PROJ_DIR/tools/reflex-platform/try-reflex

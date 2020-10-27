@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. ./.build-env
+cd $PROJ_DIR
+
+exec nix-build -o $DIST_DIR/backend -A ghc.backend

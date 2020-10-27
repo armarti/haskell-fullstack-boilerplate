@@ -1,0 +1,11 @@
+#!sh
+
+ORIG_DIR=$PWD
+cd $(dirname $0)/..
+PROJ_DIR=$PWD
+cd $ORIG_DIR
+
+PLAT_TOKEN=$(uname -s)-$(uname -m)
+DIST_DIR=$PROJ_DIR/dist
+BUILD_DIR=$PROJ_DIR/build
+LOG_DIR=$PROJ_DIR/log
